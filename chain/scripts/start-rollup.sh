@@ -25,7 +25,7 @@ BLOCK_TIME="${BLOCK_TIME:-"10s"}"
 # Use 10 bytes hex encoded value (generate random value: `openssl rand -hex 10`)
 DA_NAMESPACE_ID="${DA_NAMESPACE_ID:-"67480c4a88c4d12935d4"}"
 
-DA_CONFIG='{"base_url":"'$DA_BASE_URL'","timeout":60000000000,"fee":6000,"gas_limit":6000000,"fee":600000,"auth_token":"'$DA_AUTH_TOKEN'"}'
+DA_CONFIG='{"base_url":"'$DA_BASE_URL'","timeout":60000000000,"gas_limit":6000000,"fee":600000,"auth_token":"'$DA_AUTH_TOKEN'"}'
 
 echo "DA_NAMESPACE_ID: $DA_NAMESPACE_ID"
 echo "DA_CONFIG: $DA_CONFIG"
@@ -52,4 +52,4 @@ sed -i'.bak' 's#localhost:1317#0.0.0.0:1317#g' /root/.world/config/app.toml
 
 sed -i 's/"stake"/"ether"/g' /root/.world/config/genesis.json
 
-world start --rollkit.aggregator true --rollkit.da_layer celestia --rollkit.da_config=$DA_CONFIG --rollkit.namespace_id $DA_NAMESPACE_ID --rollkit.da_start_height $DA_BLOCK_HEIGHT --rollkit.block_time $BLOCK_TIME --minimum-gas-prices 0eth
+world start --rollkit.aggregator true --rollkit.da_layer celestia --rollkit.da_config=$DA_CONFIG --rollkit.namespace_id $DA_NAMESPACE_ID --rollkit.da_start_height $DA_BLOCK_HEIGHT --rollkit.block_time $BLOCK_TIME --minimum-gas-prices 0eth --rpc.laddr tcp://127.0.0.1:36657 --p2p.laddr "0.0.0.0:36656"
